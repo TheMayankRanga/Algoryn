@@ -1,0 +1,7 @@
+import Link from "next/link";
+import { PlatformShell } from "@/components/platform-shell";
+import { curriculum, topicKnowledge } from "@/lib/content";
+
+export default function CheatSheetsPage() {
+  return <PlatformShell title="Cheat Sheets"><div className="space-y-8"><section className="rounded-3xl border border-sky-300/20 bg-slate-900/80 p-6"><p className="text-xs uppercase tracking-[0.2em] text-sky-300">Quick reference</p><h2 className="mt-2 text-3xl font-semibold text-white">Scan the idea before you code.</h2><p className="mt-3 max-w-2xl text-slate-300">Compact topic references for recognition clues, operations, and common interview checks.</p></section><div className="grid gap-4 md:grid-cols-2">{curriculum.map((topic) => { const sheet = topicKnowledge[topic.slug]; return <article key={topic.slug} className="rounded-2xl border border-slate-800 bg-slate-900/80 p-5"><div className="flex items-start justify-between gap-3"><div><p className="text-xs uppercase tracking-[0.16em] text-sky-300">{topic.category}</p><h3 className="mt-2 text-xl font-semibold text-white">{topic.title}</h3></div><span className="font-mono text-xs text-slate-500">{topic.complexity}</span></div><p className="mt-3 text-sm text-slate-300">{sheet.definition}</p><ul className="mt-4 space-y-2 text-sm text-slate-400">{sheet.checklist.map((item) => <li key={item}>• {item}</li>)}</ul><Link href={`/learn/${topic.slug}`} className="mt-5 inline-block text-sm text-lime-200 hover:text-lime-100">Open full lesson →</Link></article>; })}</div></div></PlatformShell>;
+}
